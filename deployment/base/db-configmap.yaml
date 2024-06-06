@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-configmap
+  namespace: treetracker-like-api
+data:
+  # property-like keys; each key maps to a simple value
+  DATABASE_PASSWORD: "postgres"
+  DATABASE_DB: "test-main"
+  DATABASE_USER: "postgres"
+  DATABASE_URL: "postgresql://postgres:postgres@postgres-srv:5432/test-main"
+  environment: "productionn"
+  new: "dd"
