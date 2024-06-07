@@ -27,10 +27,10 @@ jobs:
         run: npx nx build like
 
       - name: Eslint
-        run: npx run lint
+        run: npx nx lint like
 
       - name: run tests
-        run: npx nx build like
+        run: npx nx test like
 
       # - name: run repository tests
       #   run: npm run test-repository
