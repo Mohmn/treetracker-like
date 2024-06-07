@@ -47,7 +47,7 @@ jobs:
       - name: database migration
         run: npm run migration
         env:
-          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/postgres
+          DATABASE_URL: postgresql://postgres:postgres@postgres:5432/postgres
 
       - name: run tests
         run: npx nx test like
