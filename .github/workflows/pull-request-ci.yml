@@ -16,11 +16,12 @@ jobs:
 
     services:
       postgres:
-        # Docker Hub image
         image: postgres:14
         # Provide the password for postgres
         env:
           POSTGRES_PASSWORD: postgres
+        ports:
+          - 5432:5432
         # Set health checks to wait until postgres has started
         options: >-
           --health-cmd pg_isready
@@ -47,7 +48,7 @@ jobs:
       - name: database migration
         run: npm run migration
         env:
-          DATABASE_URL: postgresql://postgres:postgres@postgres:5432/postgres
+          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/postgres
 
       - name: run tests
         run: npx nx test like
