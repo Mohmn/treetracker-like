@@ -5,14 +5,28 @@ on:
   push:
     branches:
       - '*'
-# env:
-#   project-directory: ./
-#   DATABASE_URL: ${{ secrets.DATABASE_URL }}
+
+
 
 jobs:
+
   test:
     name: Run all tests
     runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        # Docker Hub image
+        image: postgres-14
+        # Provide the password for postgres
+        env:
+          POSTGRES_PASSWORD: postgres
+        # Set health checks to wait until postgres has started
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
     steps:
       - uses: actions/checkout@v4
       - name: Use Node.js 16.x
@@ -29,6 +43,11 @@ jobs:
       - name: Eslint
         run: npx nx lint like
         continue-on-error: true
+      
+      - name: database migration
+        run: npm run migration
+        env:
+          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/postgres
 
       - name: run tests
         run: npx nx test like
