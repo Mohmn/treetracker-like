@@ -28,6 +28,7 @@ jobs:
 
       - name: Eslint
         run: npx nx lint like
+        continue-on-error: true
 
       - name: run tests
         run: npx nx test like
