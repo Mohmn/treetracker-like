@@ -6,7 +6,7 @@ metadata:
     app: treetracker-like-api
   namespace: treetracker-like-api
 spec:
-  # replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: treetracker-like-api
@@ -14,47 +14,24 @@ spec:
     metadata:
       labels:
         app: treetracker-like-api
-    spec:        
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: doks.digitalocean.com/node-pool
+                    operator: In
+                    values:
+                      - microservices-node-pool
       containers:
-      - name: treetracker-like-api
-        image: treetracker-like
-        imagePullPolicy: IfNotPresent
-        resources:
-          limits:
-            memory: "512Mi"
-            cpu: "500m"
-        ports:
-        - containerPort: 3006
-        env:
-          - name: DATABASE_URL
-            valueFrom: 
-              configMapKeyRef:
-                name: postgres-configmap
-                key: DATABASE_URL
-          - name: environment
-            valueFrom: 
-                configMapKeyRef:
-                  name: postgres-configmap
-                  key: environment
-          
-            # valueFrom:
-            #   secretKeyRef:
-            #     key: db
-            #     name: database-connection    
-
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: treetracker-like-api-service
-  namespace: treetracker-like-api
-  # labels:
-  #   app: treetracker-like-api
-spec:
-  selector:
-    app: treetracker-like-api
-  ports:
-  - protocol: TCP
-    port: 3006
-    targetPort: 3006
-  type: ClusterIP # Change to LoadBalancer or NodePort if you need external access
+        - name: treetracker-like-api
+          image: treetracker-like
+          ports:
+            - containerPort: 3006
+          env:
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: database-connection
+                  key: db
