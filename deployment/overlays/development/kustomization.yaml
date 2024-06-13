@@ -1,5 +1,5 @@
 resources:
   - ../../base
 patchesStrategicMerge:
-  - database-connection-sealed-secret.yaml
+  - db-connection-sealed-secret.yaml
   - mapping.yaml
