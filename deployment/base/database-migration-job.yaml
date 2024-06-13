@@ -7,51 +7,36 @@ spec:
   backoffLimit: 1 # allow for one re-try of the migration
   template:
     spec:
-      # affinity:
-      #   nodeAffinity:
-      #     requiredDuringSchedulingIgnoredDuringExecution:
-      #       nodeSelectorTerms:
-      #         - matchExpressions:
-      #             - key: doks.digitalocean.com/node-pool
-      #               operator: In
-      #               values:
-      #                 - microservices-node-pool
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: doks.digitalocean.com/node-pool
+                    operator: In
+                    values:
+                      - microservices-node-pool
       containers:
         - name: migration
           image: treetracker-like
           imagePullPolicy: IfNotPresent
           
           env:
-            # - name: DATABASE_URL
-              # valueFrom:
-                # secretKeyRef:
-                #   name: database-migration-connection
-                #   key: db
             - name: DATABASE_URL
-              valueFrom: 
-                configMapKeyRef:
-                  name: postgres-configmap
-                  key: DATABASE_URL
-          # command: ["sh", "-c", "echo $DATABASE_URL && nslookup postgres-db.default.svc.cluster.local && nc -zv postgres-db.default.svc.cluster.local 5432"]
+              valueFrom:
+                secretKeyRef:
+                  name: database-connection
+                  key: db
           command: ['node']
           args:
             [
-              # 'node_modules/db-migrate/bin/db-migrate',
-              # 'up',
-              # '--migrations-dir',
-              # 'database/migrations/',
-              # '-v',
-              # 'npm',
-              # 'run',
-              # 'migration:dev'
               'node_modules/prisma',
               'migrate',
               'deploy',
               '--schema=./prisma/schema.prisma'
-              # prisma migrate deploy
             ]
       restartPolicy: Never
-      initContainers:
-        - name: wait-for-postgres
-          image: busybox
-          command: ['sh', '-c', 'until nslookup postgres-srv.treetracker-like-api.svc.cluster.local; do echo waiting for postgres; sleep 2; done']
+      # initContainers:
+      #   - name: wait-for-postgres
+      #     image: busybox
+      #     command: ['sh', '-c', 'until nslookup postgres-srv.treetracker-like-api.svc.cluster.local; do echo waiting for postgres; sleep 2; done']
