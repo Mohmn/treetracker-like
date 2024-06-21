@@ -19,8 +19,6 @@ spec:
       containers:
         - name: migration
           image: greenstand/treetracker-like:TAG
-          imagePullPolicy: IfNotPresent
-          
           env:
             - name: DATABASE_URL
               valueFrom:
