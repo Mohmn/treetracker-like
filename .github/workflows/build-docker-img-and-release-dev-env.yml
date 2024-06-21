@@ -3,7 +3,7 @@ name: Service CI/CD Pipeline to Release and Deploy to Dev Env
 on:
   push:
     branches:
-      - main
+      - test-ci-cd
 
 jobs:
   release:
