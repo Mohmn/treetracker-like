@@ -19,7 +19,7 @@ export class PostController {
   
   @Post('like')
   async likePost(@Body(ValidationPipe) userLikePostDto: UserLikePostDto) {
-    return 'helloo';
+    return 'helloo world';
     const { postId, username, like } = userLikePostDto;
     return await this.postService.likePost(postId, username, like);
   }
