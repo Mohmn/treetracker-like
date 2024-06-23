@@ -6,6 +6,11 @@ import { PostService } from './post.service';
 export class PostController {
   constructor(private readonly postService: PostService) {}
 
+
+  @Get()
+  async helloWorld() {
+    return 'hello_world';
+  }
   @Post()
   async handlePostCreate(@Body(ValidationPipe) data: CreatePostDto) {
     return await this.postService.createPost(data);
