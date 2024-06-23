@@ -2,6 +2,7 @@ apiVersion: getambassador.io/v2
 kind: Mapping
 metadata:
   name: treetracker-like-api
+  namespace: treetracker-like-api
 spec:
   cors:
     origins: '*'
