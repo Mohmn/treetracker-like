@@ -4,4 +4,4 @@ metadata:
   name: treetracker-like-api
 spec:
   prefix: /like/
-  service: treetracker-like-api-service.treetracker-like-api
+  service: treetracker-like-api-service
