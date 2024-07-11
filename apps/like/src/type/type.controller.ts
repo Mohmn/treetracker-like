@@ -1,7 +1,7 @@
 import { Body, Controller, Get, Post, Put, ValidationPipe, HttpStatus, Param, Req, Res } from '@nestjs/common';
-import { CreatePostDto, EditPostDto, UserLikePostDto } from '@like-button-sample/shared';
-
+import { CreatePostDto, EditPostDto, UserLikePostDto } from 'libs/validation';
 import jwt from 'jsonwebtoken';
+import { from } from 'rxjs';
 
 @Controller()
 export class TypeController {

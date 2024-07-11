@@ -1,5 +1,5 @@
 import { Body, Controller, Get, Post, Put, ValidationPipe, HttpStatus, Param } from '@nestjs/common';
-import { CreatePostDto, EditPostDto, UserLikePostDto } from '@like-button-sample/shared';
+import { CreatePostDto, EditPostDto, UserLikePostDto } from 'libs/validation';
 import { PostService } from './post.service';
 
 @Controller('posts')

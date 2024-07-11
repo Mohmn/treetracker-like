@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { CreateUserDto } from '@like-button-sample/shared';
+import { CreateUserDto } from 'libs/validation';
 import { prisma } from '../../prisma/prisma';
 
 @Injectable()
