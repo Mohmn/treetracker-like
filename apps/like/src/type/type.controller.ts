@@ -31,6 +31,10 @@ export class TypeController {
   //   return res.status(200).send('handleGetAllTypes');
   // }
 
+  @Get()
+  async test() {
+    return 'yo skrrt';
+  }
   @Post()
   async handleCreateType(@Body() newType) {
     return 'handleCreateType';
