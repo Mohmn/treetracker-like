@@ -1,6 +1,6 @@
 {
   "name": "@like-button-sample/source",
-  "version": "0.0.0",
+  "version": "0.0.888",
   "license": "MIT",
   "scripts": {
     "migration": "node node_modules/prisma migrate deploy --schema=./apps/like/prisma/schema.prisma",
