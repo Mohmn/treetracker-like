@@ -3,7 +3,7 @@ name: Service CI/CD Pipeline to Release and Deploy to Dev Env
 on:
   push:
     branches:
-      - main
+      - test-ci-cd-2
 
 jobs:
   release:
@@ -71,7 +71,7 @@ jobs:
       - name: Install kustomize
         run: curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh" | bash
       - name: Run kustomize
-        run: (cd deployment/base && ../../kustomize edit set image greenstand/treetracker-like:${{ needs.release.outputs.bumped_version }} )
+        run: (cd deployment/base && ../../kustomize edit set image greenstand/treetracker-like=greenstand/treetracker-like=mohmin/treetracker-like:${{ needs.release.outputs.bumped_version }} )
       - name: Install doctl for kubernetes
         uses: digitalocean/action-doctl@v2
         with:
