@@ -1,6 +1,6 @@
 # Like RESTful API
 
-This api give Greenstand the ability to `like` anything, for example: like a tree, like a grower.
+This api give Greenstand the ability to `like` anything, for example: like a tree, like a grower..
 
 
 -----
