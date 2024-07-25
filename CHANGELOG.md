@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/Mohmn/treetracker-like/compare/v1.2.0...v1.3.0) (2024-07-25)
+
+
+### Features
+
+* add schmea on db connection string ([9ba214a](https://github.com/Mohmn/treetracker-like/commit/9ba214a50d2cb59cf38ff920dc7770ed4815d8cb))
+
 # [1.2.0](https://github.com/Mohmn/treetracker-like/compare/v1.1.0...v1.2.0) (2024-07-16)
 
 
